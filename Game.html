@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doofenshmirtz Evil Incorporated - Platypus Clicker</title>
+    <audio id="bgMusic" loop>
+        <source src="./Figs/background.mp3" type="audio/mpeg">
+    </audio>
+    <link rel="stylesheet" href="./style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Permanent+Marker&display=swap" rel="stylesheet">
+</head>
+<body>
+    <button id="musicToggle">🔇 Music Off</button>
+    <div class="evil-container">
+        <div class="title-container">
+            <h1>DOOFENSHMIRTZ EVIL INCORPORATED</h1>
+            <h2>PLATYPUS POTAT-INATOR!</h2>
+            <div class="evil-logo"></div>
+        </div>
+
+        <div class="counter-container">
+            <p class="counter-text" id="counter">Platypuses: 0</p>
+            <p class="counter-text" id="pps">Platypuses per second: 0 pps</p>
+        </div>
+        
+        <!-- Main Perry button -->
+        <div class="perry-container">
+            <img class="image-perry" id="BigPotato" src="./Figs/BigPotato.jpg" alt="Perry the Platypus">
+            <div class="perry-hat"></div>
+        </div>
+        
+        <!-- Bonus buttons (Doofenshmirtz's inventions) -->
+        <img id="Sweet Potato Bonus" class="image-bonus hidden" src="./Figs/SweetPotato.jpg" alt="Freeze-inator">
+        <img id="Red Potato Bonus" class="image-bonus hidden" src="./Figs/RedPotato.jpg" alt="Shrink-inator">
+        <img id="Austrian Crescent Bonus" class="image-bonus hidden" src="./Figs/AustrianCrescent.jpeg" alt="Copy-inator">
+        <img id="Blue Potato Bonus" class="image-bonus hidden" src="./Figs/BluePotato.png" alt="Age-inator">
+        <img id="Yukon Gold Bonus" class="image-bonus hidden" src="./Figs/YukonGold.png" alt="Destroy-inator">
+        
+        <!-- Message boxes -->
+        <div id="Message Box" class="message hidden">
+            <p></p>
+        </div>
+        <div id="Achievement Box" class="achievement hidden">
+            <div class="achievement-icon"></div>
+            <p></p>
+        </div>
+        
+        <!-- Evil schemes grid -->
+        <div class="grid-container">
+            <!-- Row 1: Evil Buildings -->
+            <div class="scheme-container">
+                <img id="Farm" class="scheme-button" src="./Figs/Farm.png" alt="Evil Lair">
+                <span id="Farm-text" class="scheme-text">0 Evil Lairs<br>Cost: 50<br>Adds: 1 pps</span>
+                <div class="scheme-badge">Scheme</div>
+            </div>
+            
+            <div class="scheme-container">
+                <img id="Food truck" class="scheme-button" src="./Figs/FoodTruck.png" alt="Evil Food Truck">
+                <span id="Food truck-text" class="scheme-text">0 Evil Food Trucks<br>Cost: 5000<br>Adds: 5 pps</span>
+                <div class="scheme-badge">Scheme</div>
+            </div>
+            
+            <div class="scheme-container">
+                <img id="Chips factory" class="scheme-button" src="./Figs/Factory.png" alt="Evil Factory">
+                <span id="Chips factory-text" class="scheme-text">0 Evil Factories<br>Cost: 50000<br>Adds: 50 pps</span>
+                <div class="scheme-badge">Scheme</div>
+            </div>
+            
+            <div class="scheme-container">
+                <img id="Potato cloner" class="scheme-button" src="./Figs/Cloner.png" alt="Clone-inator">
+                <span id="Potato cloner-text" class="scheme-text">0 Clone-inators<br>Cost: 200000<br>Adds: 250 pps</span>
+                <div class="scheme-badge">Scheme</div>
+            </div>
+            
+            <!-- Row 2: Evil Upgrades -->
+            <div class="upgrade-container">
+                <img id="Harvester" class="upgrade-button" src="./Figs/Harvester.png" alt="Minion Upgrade">
+                <span id="Harvester-text" class="upgrade-text">0 Minion Upgrades<br>Cost: 5000<br>Evil Lair prod. x 2</span>
+                <div class="upgrade-badge">Upgrade</div>
+            </div>
+            
+            <div class="upgrade-container">
+                <img id="Poutine maker" class="upgrade-button" src="./Figs/PoutineMaker.png" alt="Truck Upgrade">
+                <span id="Poutine maker-text" class="upgrade-text">0 Truck Upgrades<br>Cost: 50000<br>Evil Food Truck prod. x 2</span>
+                <div class="upgrade-badge">Upgrade</div>
+            </div>
+            
+            <div class="upgrade-container">
+                <img id="Instant fryer" class="upgrade-button" src="./Figs/InstantFryer.png" alt="Factory Upgrade">
+                <span id="Instant fryer-text" class="upgrade-text">0 Factory Upgrades<br>Cost: 500000<br>Evil Factory prod. x 2</span>
+                <div class="upgrade-badge">Upgrade</div>
+            </div>
+            
+            <div class="upgrade-container">
+                <img id="Advanced DNA" class="upgrade-button" src="./Figs/DNA.png" alt="Super Clone-inator">
+                <span id="Advanced DNA-text" class="upgrade-text">0 Super Clone-inators<br>Cost: 2000000<br>Clone-inator prod. x 2</span>
+                <div class="upgrade-badge">Upgrade</div>
+            </div>
+        </div>
+        
+        <div class="evil-footer">
+            <p>"Curse you, Perry the Platypus!"</p>
+        </div>
+    </div>
+
+    <div id="jumpscare" class="hidden">
+        <img src="Figs/jumpscare.jpg" style="width:100vw;height:100vh;object-fit:cover;position:fixed;top:0;left:0;z-index:9999;">
+        <audio id="screamSound" src="./Figs/scream.mp3"></audio>
+    </div>
+
+    <script src="./Counter.js"></script>
+    <script src="./Buttons.js"></script>
+    <script>
+        //Creating the Counter 
+        const counter = new Counter("counter", "pps", "Message Box", "Achievement Box");
+        
+        //// Creating below a Button object corresponding to each Button created above
+        //BigPotato
+        const bigPotato = new ClickingButton("BigPotato", counter);
+        
+        //The 4 types of buildings
+        const building1 = new BuildingButton("Farm", counter, 50, 1);
+        const building2 = new BuildingButton("Food truck", counter, 5000, 5);
+        const building3 = new BuildingButton("Chips factory", counter, 50000, 50);
+        const building4 = new BuildingButton("Potato cloner", counter, 200000, 250);
+        
+        //The 4 types of building upgrades
+        const upgrade1 = new UpgradeButton("Harvester", counter, 5000, 2, building1);
+        const upgrade2 = new UpgradeButton("Poutine maker", counter, 50000, 2, building2);
+        const upgrade3 = new UpgradeButton("Instant fryer", counter, 500000, 2, building3);
+        const upgrade4 = new UpgradeButton("Advanced DNA", counter, 2000000, 2, building4);
+        
+        //Creating the 5 types of bonus buttons and adding them to the counter
+        counter.addBonusButton(new BonusButton("Sweet Potato Bonus", counter, 2, 10));
+        counter.addBonusButton(new BonusButton("Red Potato Bonus", counter, 3, 15));
+        counter.addBonusButton(new BonusButton("Austrian Crescent Bonus", counter, 5, 20));
+        counter.addBonusButton(new BonusButton("Blue Potato Bonus", counter, 7, 25));
+        counter.addBonusButton(new BonusButton("Yukon Gold Bonus", counter, 10, 30));
+
+        // Store all buttons in a global array for affordability updates
+        window.allButtons = [
+            bigPotato, building1, building2, building3, building4, 
+            upgrade1, upgrade2, upgrade3, upgrade4
+        ];
+
+        // Initial affordability update
+        counter.updateAllAffordability();
+
+        const bgMusic = document.getElementById('bgMusic');
+        const musicToggle = document.getElementById('musicToggle');
+        let isMusicPlaying = false;
+
+        musicToggle.addEventListener('click', () => {
+            isMusicPlaying = !isMusicPlaying;
+            if (isMusicPlaying) {
+            bgMusic.play();
+            musicToggle.textContent = "🔊 Music On";
+            } else {
+            bgMusic.pause();
+            musicToggle.textContent = "🔇 Music Off";
+            }
+        });
+    </script>
+</body>
+</html>
