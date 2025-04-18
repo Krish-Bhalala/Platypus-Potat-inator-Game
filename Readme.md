@@ -1,4 +1,4 @@
-# **Potato Clicker Game – Perry the Platypus Edition!**
+# **[Potato Clicker Game – Perry the Platypus Edition!](https://krish-bhalala.github.io/Platypus-Potat-inator-Game/)**
 
 ## **Overview**
 
